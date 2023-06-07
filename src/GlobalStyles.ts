@@ -11,7 +11,7 @@ const GlobalStyles = createGlobalStyle`
  body{
     width: 100%;
     min-height: 100vh;
-    font-family: 'Kumbh Sans', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
  }
 
 `;

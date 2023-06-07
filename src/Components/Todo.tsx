@@ -28,13 +28,14 @@ const Todo = (): JSX.Element => {
           onChange={(e) => setText(e.target.value)}
           className="createTodo"
           type="text"
-          placeholder="Create new todo"
+          placeholder="Create new todo..."
         />
       </form>
-      <ul>
+      <ul className="list">
         {tasks.map((task) => (
           <li key={task.id} className="todo">
             <input
+              className="isDone"
               type="checkbox"
               onClick={() => dispatch(completed(task.id))}
             />
@@ -62,6 +63,7 @@ const TodoContainer = styled.div`
     align-items: center;
     justify-content: center;
     gap: 12px;
+    padding: 14px 0 14px 20px;
     background-color: white;
     border-radius: 5px;
     box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
@@ -80,13 +82,53 @@ const TodoContainer = styled.div`
       width: 100%;
       height: 48px;
       border: none;
+
+      font-family: Josefin Sans;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 12px;
+      letter-spacing: -0.17px;
+      color: #494c6b;
+    }
+
+    .createTodo:focus-visible {
+      outline: none;
+    }
+    .createTodo::placeholder {
+      color: #9495a5;
     }
   }
 
-  .Todo {
-    display: flex;
+  .list {
     width: 327px;
-    height: 48px;
+    display: flex;
     align-items: center;
+    flex-direction: column;
+    padding: 20px 24px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
+
+    .todo {
+      display: flex;
+      width: 327px;
+      height: 48px;
+      align-items: center;
+      width: 100%;
+      gap: 24px;
+
+      .isDone {
+        width: 20px;
+        height: 20px;
+      }
+
+      p {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 12px;
+        letter-spacing: -0.17px;
+        color: #494c6b;
+      }
+    }
   }
 `;
