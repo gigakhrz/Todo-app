@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import todoSlice, { Todo } from "./todoSlice";
+import todoSlice, { Todoarray } from "./todoSlice";
 
 const store = configureStore({
   reducer: {
@@ -8,7 +8,7 @@ const store = configureStore({
 });
 
 export type RootState = {
-  createTodo: Todo;
+  createTodo: Todoarray;
 };
 
 export default store;

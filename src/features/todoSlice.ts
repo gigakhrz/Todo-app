@@ -1,15 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import Todo from "../Components/Todo";
 
-export interface Todo {
+interface Todo {
   id: number;
   text: string;
   done: boolean;
 }
 
-const initialState: Todo = {
-  id: 5,
-  text: "coding",
-  done: false,
+export interface Todoarray {
+  tasks: Todo[];
+}
+
+const initialState: Todoarray = {
+  tasks: [],
 };
 
 const todoSlice = createSlice({
@@ -17,11 +20,19 @@ const todoSlice = createSlice({
   initialState,
   reducers: {
     createTodo: (state, action: PayloadAction<string>) => {
-      state.text = action.payload;
+      const newTodo = {
+        id: Date.now(),
+        text: action.payload,
+        done: false,
+      };
+      state.tasks.unshift(newTodo);
     },
 
-    completed: (state) => {
-      state.done = !state.done;
+    completed: (state, action: PayloadAction<number>) => {
+      const task = state.tasks.find((task) => task.id === action.payload);
+      if (task) {
+        task.done = !task.done;
+      }
     },
   },
 });

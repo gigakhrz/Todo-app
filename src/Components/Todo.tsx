@@ -5,22 +5,24 @@ import { RootState } from "../features/store";
 import { useState } from "react";
 
 const Todo = (): JSX.Element => {
-  const task = useSelector((store: RootState) => store.createTodo);
+  const tasks = useSelector((store: RootState) => store.createTodo.tasks);
   const dispatch = useDispatch();
 
   const [text, setText] = useState<string>("");
 
   const handleAddTodo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(createTodo(text));
+    if (text.trim() !== "") {
+      dispatch(createTodo(text));
+    }
   };
 
-  console.log(task.done);
+  console.log(tasks);
 
   return (
     <TodoContainer>
       <form className="create" onSubmit={handleAddTodo}>
-        <input type="submit" className="check" />
+        <button type="submit" className="check"></button>
         <input
           id="text1"
           onChange={(e) => setText(e.target.value)}
@@ -29,11 +31,17 @@ const Todo = (): JSX.Element => {
           placeholder="Create new todo"
         />
       </form>
-
-      <div className="Todo">
-        <input type="checkbox" onClick={() => dispatch(completed())} />
-        <p>{task.text}</p>
-      </div>
+      <ul>
+        {tasks.map((task) => (
+          <li key={task.id} className="todo">
+            <input
+              type="checkbox"
+              onClick={() => dispatch(completed(task.id))}
+            />
+            <p>{task.text}</p>
+          </li>
+        ))}
+      </ul>
     </TodoContainer>
   );
 };
@@ -46,18 +54,26 @@ const TodoContainer = styled.div`
   flex-direction: column;
   gap: 16px;
   align-items: center;
-  justify-content: center;
 
   .create {
     width: 327px;
+    height: 48px;
     display: flex;
     align-items: center;
-    border: 2px solid red;
+    justify-content: center;
+    gap: 12px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
 
     .check {
-      margin: 14px 0 20px;
       width: 20px;
       height: 20px;
+
+      border: none;
+      background: white;
+      border-radius: 50%;
+      border: 2px solid #d1d2da;
     }
 
     .createTodo {
