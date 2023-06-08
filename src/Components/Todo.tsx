@@ -35,22 +35,25 @@ const Todo = (): JSX.Element => {
       </form>
       <ul className="list">
         {tasks.map((task) => (
-          <li key={task.id} className="todo">
-            <input
-              className="isDone"
-              type="checkbox"
-              onClick={() => dispatch(completed(task.id))}
-            />
-            <p>{task.text}</p>
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18">
-              <path
-                fill="#494C6B"
-                fillRule="evenodd"
-                d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+          <div className="taskDiv">
+            <li key={task.id} className="todo">
+              <input
+                className="isDone"
+                type="checkbox"
+                onClick={() => dispatch(completed(task.id))}
               />
-            </svg>
-          </li>
+              <p>{task.text}</p>
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+                <path
+                  fill="#494C6B"
+                  fillRule="evenodd"
+                  d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+                />
+              </svg>
+            </li>
+            <hr />
+          </div>
         ))}
       </ul>
     </TodoContainer>
@@ -105,7 +108,7 @@ const TodoContainer = styled.div<{
       font-weight: 400;
       line-height: 12px;
       letter-spacing: -0.17px;
-      color: #494c6b;
+      color: ${(props) => (props.mode ? "#C8CBE7" : "#494c6b")};
       background-color: ${(props) => (props.mode ? "#25273D" : "white")};
     }
 
@@ -114,6 +117,21 @@ const TodoContainer = styled.div<{
     }
     .createTodo::placeholder {
       color: #9495a5;
+      color: ${(props) => (props.mode ? "#9495a5" : "#767992")};
+    }
+  }
+
+  .taskDiv {
+    width: 327px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    hr {
+      border: none;
+      height: 1px;
+      width: 100%;
+      background-color: ${(props) => (props.mode ? "#393A4B" : "#E3E4F1")};
     }
   }
 
@@ -151,7 +169,7 @@ const TodoContainer = styled.div<{
         font-weight: 400;
         line-height: 12px;
         letter-spacing: -0.17px;
-        color: #494c6b;
+        color: ${(props) => (props.mode ? "#C8CBE7" : "#494c6b")};
       }
     }
 
