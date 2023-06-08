@@ -35,7 +35,7 @@ const Todo = (): JSX.Element => {
       </form>
       <ul className="list">
         {tasks.map((task) => (
-          <div className="taskDiv">
+          <TaskDiv mode={mode} done={task.done}>
             <li key={task.id} className="todo">
               <input
                 className="isDone"
@@ -53,7 +53,7 @@ const Todo = (): JSX.Element => {
               </svg>
             </li>
             <hr />
-          </div>
+          </TaskDiv>
         ))}
       </ul>
     </TodoContainer>
@@ -121,20 +121,6 @@ const TodoContainer = styled.div<{
     }
   }
 
-  .taskDiv {
-    width: 327px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-
-    hr {
-      border: none;
-      height: 1px;
-      width: 100%;
-      background-color: ${(props) => (props.mode ? "#393A4B" : "#E3E4F1")};
-    }
-  }
-
   .list {
     display: ${(props) => (props.task.length == 0 ? "none" : "flex")};
     width: 327px;
@@ -169,22 +155,50 @@ const TodoContainer = styled.div<{
         font-weight: 400;
         line-height: 12px;
         letter-spacing: -0.17px;
-        color: ${(props) => (props.mode ? "#C8CBE7" : "#494c6b")};
       }
     }
 
     svg {
       width: 18px;
       height: 18px;
-      display: none;
 
       @media (max-width: 768px) {
         transform: scale(0.67);
       }
+      @media (min-width: 1024px) {
+        display: none;
+      }
     }
   }
+  @media (min-width: 1024px) {
+    .list li:hover svg {
+      display: block;
+    }
+  }
+`;
 
-  .list li:hover svg {
-    display: block;
+const TaskDiv = styled.div<{ mode: boolean; done: boolean }>`
+  width: 327px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  hr {
+    border: none;
+    height: 1px;
+    width: 100%;
+    background-color: ${(props) => (props.mode ? "#393A4B" : "#E3E4F1")};
+  }
+
+  p {
+    text-decoration: ${(props) => (props.done ? "line-through" : "")};
+    color: ${(props) =>
+      props.done
+        ? props.mode
+          ? "#4D5067"
+          : "#D1D2DA"
+        : props.mode
+        ? "#C8CBE7"
+        : "#494c6b"};
   }
 `;
