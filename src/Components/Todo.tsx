@@ -18,9 +18,11 @@ const Todo = (): JSX.Element => {
   };
 
   console.log(tasks);
+  //for lightmode
+  const mode = useSelector((store: RootState) => store.lightMode.dark);
 
   return (
-    <TodoContainer task={tasks}>
+    <TodoContainer task={tasks} mode={mode}>
       <form className="create" onSubmit={handleAddTodo}>
         <button type="submit" className="check"></button>
         <input
@@ -59,6 +61,7 @@ export default Todo;
 
 const TodoContainer = styled.div<{
   task: { id: number; text: string; done: boolean }[];
+  mode: boolean;
 }>`
   width: 100%;
   display: flex;
@@ -74,9 +77,12 @@ const TodoContainer = styled.div<{
     justify-content: center;
     gap: 12px;
     padding: 14px 0 14px 20px;
-    background-color: white;
+    background-color: ${(props) => (props.mode ? "#25273D" : "white")};
     border-radius: 5px;
-    box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
+    box-shadow: ${(props) =>
+      props.mode
+        ? " 0px 35px 50px -15px rgba(0, 0, 0, 0.5)"
+        : " 0px 35px 50px -15px rgba(194, 195, 214, 0.5)"};
 
     .check {
       width: 20px;
@@ -86,6 +92,7 @@ const TodoContainer = styled.div<{
       background: white;
       border-radius: 50%;
       border: 2px solid #d1d2da;
+      background-color: ${(props) => (props.mode ? "#25273D" : "white")};
     }
 
     .createTodo {
@@ -99,6 +106,7 @@ const TodoContainer = styled.div<{
       line-height: 12px;
       letter-spacing: -0.17px;
       color: #494c6b;
+      background-color: ${(props) => (props.mode ? "#25273D" : "white")};
     }
 
     .createTodo:focus-visible {
@@ -116,7 +124,11 @@ const TodoContainer = styled.div<{
     flex-direction: column;
     background-color: white;
     border-radius: 5px;
-    box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
+
+    box-shadow: ${(props) =>
+      props.mode
+        ? " 0px 35px 50px -15px rgba(0, 0, 0, 0.5)"
+        : " 0px 35px 50px -15px rgba(194, 195, 214, 0.5)"};
 
     .todo {
       display: flex;
@@ -126,6 +138,7 @@ const TodoContainer = styled.div<{
       width: 100%;
       gap: 24px;
       padding: 20px 24px;
+      background-color: ${(props) => (props.mode ? "#25273D" : "white")};
 
       .isDone {
         width: 20px;

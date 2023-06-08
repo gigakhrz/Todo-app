@@ -16,7 +16,7 @@ const Header = (): JSX.Element => {
   return (
     <HeaderContainer>
       <img src={logo} alt="logo img" />
-      <img onClick={handleSetMode} src={mode ? mun : sun} alt="" />
+      <img onClick={handleSetMode} src={mode ? sun : mun} alt="" />
     </HeaderContainer>
   );
 };
