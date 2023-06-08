@@ -20,7 +20,7 @@ const Todo = (): JSX.Element => {
   console.log(tasks);
 
   return (
-    <TodoContainer>
+    <TodoContainer task={tasks}>
       <form className="create" onSubmit={handleAddTodo}>
         <button type="submit" className="check"></button>
         <input
@@ -49,7 +49,9 @@ const Todo = (): JSX.Element => {
 
 export default Todo;
 
-const TodoContainer = styled.div`
+const TodoContainer = styled.div<{
+  task: { id: number; text: string; done: boolean }[];
+}>`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -100,11 +102,10 @@ const TodoContainer = styled.div`
   }
 
   .list {
+    display: ${(props) => (props.task.length == 0 ? "none" : "flex")};
     width: 327px;
-    display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 20px 24px;
     background-color: white;
     border-radius: 5px;
     box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
@@ -116,6 +117,7 @@ const TodoContainer = styled.div`
       align-items: center;
       width: 100%;
       gap: 24px;
+      padding: 20px 24px;
 
       .isDone {
         width: 20px;

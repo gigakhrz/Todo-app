@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import Todo from "../Components/Todo";
 
 interface Todo {
   id: number;
