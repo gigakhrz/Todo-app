@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { createTodo, completed } from "../features/todoSlice";
+import { createTodo, completed, deleteTodo } from "../features/todoSlice";
 import { RootState } from "../features/store";
 import { useState } from "react";
+import ChooseTodos from "./ChooseTodos";
 
 const Todo = (): JSX.Element => {
   const tasks = useSelector((store: RootState) => store.createTodo.tasks);
@@ -35,8 +36,8 @@ const Todo = (): JSX.Element => {
       </form>
       <ul className="list">
         {tasks.map((task) => (
-          <TaskDiv mode={mode} done={task.done}>
-            <li key={task.id} className="todo">
+          <TaskDiv mode={mode} done={task.done} key={task.id}>
+            <li className="todo">
               <input
                 className="isDone"
                 type="checkbox"
@@ -44,7 +45,12 @@ const Todo = (): JSX.Element => {
               />
               <p>{task.text}</p>
 
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+              <svg
+                onClick={() => dispatch(deleteTodo(task.id))}
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+              >
                 <path
                   fill="#494C6B"
                   fillRule="evenodd"
@@ -56,6 +62,7 @@ const Todo = (): JSX.Element => {
           </TaskDiv>
         ))}
       </ul>
+      {tasks.length > 0 ? <ChooseTodos /> : null}
     </TodoContainer>
   );
 };
