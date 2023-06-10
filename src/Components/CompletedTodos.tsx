@@ -16,7 +16,7 @@ const CompletedTodos = (): JSX.Element => {
   return (
     <Cont>
       <Ulcontainer task={tasks} mode={mode}>
-        {Completed.map((complete) => (
+        {Completed.map((complete, index) => (
           <TaskDiv mode={mode} done={complete.done} key={complete.id}>
             <li className="todo">
               <div
@@ -42,7 +42,7 @@ const CompletedTodos = (): JSX.Element => {
                 />
               </svg>
             </li>
-            <hr />
+            {index !== Completed.length - 1 && <hr />}
           </TaskDiv>
         ))}
       </Ulcontainer>
