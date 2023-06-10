@@ -77,6 +77,9 @@ const TaskDiv = styled.div<{ mode: boolean; done: boolean }>`
   display: flex;
   align-items: center;
   flex-direction: column;
+  @media (min-width: 1024px) {
+    width: 540px;
+  }
 
   hr {
     border: none;
@@ -207,12 +210,21 @@ const Count = styled.div<{ mode: boolean }>`
   padding: 0 20px;
   border-radius: 5px;
 
+  @media (min-width: 1024px) {
+    width: 540px;
+    padding: 0 24px;
+  }
+
   p {
     font-size: 12px;
     font-weight: 400;
     line-height: 12px;
     letter-spacing: -0.17px;
     color: ${(props) => (props.mode ? "#9495A5" : "#5B5E7E")};
+    @media (min-width: 1024px) {
+      font-size: 14px;
+      line-height: 14px;
+    }
   }
 
   button {
@@ -227,5 +239,9 @@ const Count = styled.div<{ mode: boolean }>`
     font-weight: 400;
     line-height: 12px;
     letter-spacing: -0.17px;
+    @media (min-width: 1024px) {
+      font-size: 14px;
+      line-height: 14px;
+    }
   }
 `;
