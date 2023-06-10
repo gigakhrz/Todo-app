@@ -33,6 +33,7 @@ const ActiveTodos = (): JSX.Element => {
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
                 height="18"
+                className="delete-icon"
               >
                 <path
                   fill="#494C6B"
@@ -63,7 +64,60 @@ const Cont = styled.div`
   gap: 16px;
 `;
 
-const Ulcontainer = styled.ul<{
+const TaskDiv = styled.div<{ mode: boolean; done: boolean }>`
+  width: 327px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  hr {
+    border: none;
+    height: 1px;
+    width: 100%;
+    background-color: ${(props) => (props.mode ? "#393A4B" : "#E3E4F1")};
+  }
+
+  .isDone {
+    width: 20px;
+    height: 20px;
+    @media (min-width: 1024px) {
+      width: 24px;
+      height: 24px;
+
+      cursor: pointer;
+    }
+
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(211, 211, 211, 0.7);
+    cursor: pointer;
+    background: ${(props) =>
+      props.done ? " linear-gradient(135deg, #55ddff 0%, #c058f3 100%)" : ""};
+    img {
+      display: ${(props) => (props.done ? "flex" : "none")};
+    }
+  }
+
+  .isDone:hover {
+    border: 1px solid #c058f3;
+  }
+
+  p {
+    text-decoration: ${(props) => (props.done ? "line-through" : "")};
+    color: ${(props) =>
+      props.done
+        ? props.mode
+          ? "#4D5067"
+          : "#D1D2DA"
+        : props.mode
+        ? "#C8CBE7"
+        : "#494c6b"};
+  }
+`;
+
+const Ulcontainer = styled.div<{
   task: { id: number; text: string; done: boolean }[];
   mode: boolean;
 }>`
@@ -86,9 +140,21 @@ const Ulcontainer = styled.ul<{
     align-items: center;
     width: 100%;
     gap: 24px;
-    padding: 20px 24px;
+    padding: 16px 20px;
     background-color: ${(props) => (props.mode ? "#25273D" : "white")};
     border-radius: 5px;
+    @media screen and (min-width: 1024px) {
+      width: 540px;
+      gap: 24px;
+      padding: 20px 24px;
+    }
+
+    &:hover {
+      svg.delete-icon {
+        display: block;
+        cursor: pointer;
+      }
+    }
 
     p {
       width: 78%;
@@ -96,6 +162,13 @@ const Ulcontainer = styled.ul<{
       font-weight: 400;
       line-height: 12px;
       letter-spacing: -0.17px;
+
+      @media screen and (min-width: 1024px) {
+        font-size: 18px;
+        line-height: 18px;
+        letter-spacing: -0.25px;
+        cursor: pointer;
+      }
     }
   }
 
@@ -110,52 +183,6 @@ const Ulcontainer = styled.ul<{
       display: none;
     }
   }
-
-  @media (min-width: 1024px) {
-    .list li:hover svg {
-      display: block;
-    }
-  }
-`;
-
-const TaskDiv = styled.div<{ mode: boolean; done: boolean }>`
-  width: 327px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
-  hr {
-    border: none;
-    height: 1px;
-    width: 100%;
-    background-color: ${(props) => (props.mode ? "#393A4B" : "#E3E4F1")};
-  }
-
-  p {
-    text-decoration: ${(props) => (props.done ? "line-through" : "")};
-    color: ${(props) =>
-      props.done
-        ? props.mode
-          ? "#4D5067"
-          : "#D1D2DA"
-        : props.mode
-        ? "#C8CBE7"
-        : "#494c6b"};
-  }
-
-  .isDone {
-    width: 20px;
-    height: 20px;
-
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(211, 211, 211, 0.7);
-    cursor: pointer;
-    background: ${(props) =>
-      props.done ? " linear-gradient(135deg, #55ddff 0%, #c058f3 100%)" : ""};
-  }
 `;
 
 const Count = styled.div<{ mode: boolean }>`
@@ -163,7 +190,7 @@ const Count = styled.div<{ mode: boolean }>`
   height: 48px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   background-color: ${(props) => (props.mode ? "#25273D" : "white")};
   box-shadow: ${(props) =>
     props.mode

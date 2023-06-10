@@ -148,12 +148,13 @@ const Ulcontainer = styled.div<{
     align-items: center;
     width: 100%;
     gap: 24px;
-    padding: 20px 24px;
+    padding: 16px 20px;
     background-color: ${(props) => (props.mode ? "#25273D" : "white")};
     border-radius: 5px;
     @media screen and (min-width: 1024px) {
       width: 540px;
       gap: 24px;
+      padding: 20px 24px;
     }
 
     &:hover {
