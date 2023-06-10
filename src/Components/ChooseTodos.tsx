@@ -31,6 +31,15 @@ const ChooseContainer = styled.nav<{ mode: boolean }>`
   justify-content: center;
   gap: 19px;
 
+  @media (min-width: 1024px) {
+    width: 540px;
+    gap: 25px;
+
+    a:hover {
+      color: #3a7cfd;
+    }
+  }
+
   a {
     text-decoration: none;
     font-size: 14px;
@@ -38,5 +47,10 @@ const ChooseContainer = styled.nav<{ mode: boolean }>`
     line-height: 14px;
     letter-spacing: -0.19px;
     color: #9495a5;
+
+    @media (min-width: 1024px) {
+      font-size: 16px;
+      line-height: 16px;
+    }
   }
 `;
