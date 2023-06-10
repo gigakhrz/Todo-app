@@ -13,6 +13,7 @@ const CreateNewTodo = (): JSX.Element => {
     e.preventDefault();
     if (text.trim() !== "") {
       dispatch(createTodo(text));
+      setText("");
     }
   };
 
@@ -23,6 +24,7 @@ const CreateNewTodo = (): JSX.Element => {
       <button type="submit" className="check"></button>
       <input
         id="text1"
+        value={text}
         onChange={(e) => setText(e.target.value)}
         className="createTodo"
         type="text"
