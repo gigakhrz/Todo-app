@@ -65,7 +65,7 @@ const Create = styled.form<{ mode: boolean }>`
     border: none;
     background: white;
     border-radius: 50%;
-    border: 2px solid #d1d2da;
+    border: 1px solid rgba(211, 211, 211, 0.7);
     background-color: ${(props) => (props.mode ? "#25273D" : "white")};
   }
 
