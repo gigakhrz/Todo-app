@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { completed, deleteTodo } from "../features/todoSlice";
 import { RootState } from "../features/store";
-
+import check from "../assets/icon-check.svg";
 import ChooseTodos from "./ChooseTodos";
 
 const Todo = (): JSX.Element => {
@@ -14,39 +14,50 @@ const Todo = (): JSX.Element => {
   const mode = useSelector((store: RootState) => store.lightMode.dark);
 
   return (
-    <Ulcontainer task={tasks} mode={mode}>
-      {tasks.map((task) => (
-        <TaskDiv mode={mode} done={task.done} key={task.id}>
-          <li className="todo">
-            <input
-              className="isDone"
-              type="checkbox"
-              onClick={() => dispatch(completed(task.id))}
-            />
-            <p>{task.text}</p>
+    <Cont>
+      <Ulcontainer task={tasks} mode={mode}>
+        {tasks.map((task) => (
+          <TaskDiv mode={mode} done={task.done} key={task.id}>
+            <li className="todo">
+              <div
+                className="isDone"
+                onClick={() => dispatch(completed(task.id))}
+              >
+                <img src={check} alt="" />
+              </div>
+              <p>{task.text}</p>
 
-            <svg
-              onClick={() => dispatch(deleteTodo(task.id))}
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-            >
-              <path
-                fill="#494C6B"
-                fillRule="evenodd"
-                d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
-              />
-            </svg>
-          </li>
-          <hr />
-        </TaskDiv>
-      ))}
+              <svg
+                onClick={() => dispatch(deleteTodo(task.id))}
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+              >
+                <path
+                  fill="#494C6B"
+                  fillRule="evenodd"
+                  d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+                />
+              </svg>
+            </li>
+            <hr />
+          </TaskDiv>
+        ))}
+      </Ulcontainer>
       {tasks.length > 0 ? <ChooseTodos /> : null}
-    </Ulcontainer>
+    </Cont>
   );
 };
 
 export default Todo;
+
+const Cont = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+`;
 
 const Ulcontainer = styled.div<{
   task: { id: number; text: string; done: boolean }[];
@@ -73,11 +84,6 @@ const Ulcontainer = styled.div<{
     gap: 24px;
     padding: 20px 24px;
     background-color: ${(props) => (props.mode ? "#25273D" : "white")};
-
-    .isDone {
-      width: 20px;
-      height: 20px;
-    }
 
     p {
       width: 78%;
@@ -118,6 +124,20 @@ const TaskDiv = styled.div<{ mode: boolean; done: boolean }>`
     height: 1px;
     width: 100%;
     background-color: ${(props) => (props.mode ? "#393A4B" : "#E3E4F1")};
+  }
+
+  .isDone {
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(211, 211, 211, 0.7);
+    cursor: pointer;
+    background: ${(props) =>
+      props.done ? " linear-gradient(135deg, #55ddff 0%, #c058f3 100%)" : ""};
   }
 
   p {

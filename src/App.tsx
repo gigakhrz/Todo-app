@@ -45,7 +45,7 @@ const Container = styled.main<{ mode: boolean }>`
   background-repeat: no-repeat;
   background-size: 100% 200px;
   padding-top: 48px;
-  background-color: ${(props) => (props.mode ? "#25273D" : "white")};
+  background-color: ${(props) => (props.mode ? "#25273D" : " #FAFAFA;")};
 `;
 
 const TodoContainer = styled.div`

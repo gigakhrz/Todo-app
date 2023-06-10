@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { RootState } from "../features/store";
 import ChooseTodos from "./ChooseTodos";
 import { completed, deleteTodo } from "../features/todoSlice";
+import check from "../assets/icon-check.svg";
 
 const ActiveTodos = (): JSX.Element => {
   const tasks = useSelector((store: RootState) => store.createTodo.tasks);
@@ -13,41 +14,52 @@ const ActiveTodos = (): JSX.Element => {
   const actives = tasks.filter((task) => task.done === false);
 
   return (
-    <Ulcontainer task={tasks} mode={mode}>
-      {actives.map((active) => (
-        <TaskDiv mode={mode} done={active.done} key={active.id}>
-          <li className="todo">
-            <input
-              className="isDone"
-              type="checkbox"
-              onClick={() => dispatch(completed(active.id))}
-            />
-            <p>{active.text}</p>
+    <Cont>
+      <Ulcontainer task={tasks} mode={mode}>
+        {actives.map((active) => (
+          <TaskDiv mode={mode} done={active.done} key={active.id}>
+            <li className="todo">
+              <div
+                className="isDone"
+                onClick={() => dispatch(completed(active.id))}
+              >
+                <img src={check} alt="" />
+              </div>
+              <p>{active.text}</p>
 
-            <svg
-              onClick={() => dispatch(deleteTodo(active.id))}
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-            >
-              <path
-                fill="#494C6B"
-                fillRule="evenodd"
-                d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
-              />
-            </svg>
-          </li>
-          <hr />
-        </TaskDiv>
-      ))}
+              <svg
+                onClick={() => dispatch(deleteTodo(active.id))}
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+              >
+                <path
+                  fill="#494C6B"
+                  fillRule="evenodd"
+                  d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+                />
+              </svg>
+            </li>
+            <hr />
+          </TaskDiv>
+        ))}
+      </Ulcontainer>
       {tasks.length > 0 ? <ChooseTodos /> : null}
-    </Ulcontainer>
+    </Cont>
   );
 };
 
 export default ActiveTodos;
 
-const Ulcontainer = styled.div<{
+const Cont = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+`;
+
+const Ulcontainer = styled.ul<{
   task: { id: number; text: string; done: boolean }[];
   mode: boolean;
 }>`
@@ -72,11 +84,6 @@ const Ulcontainer = styled.div<{
     gap: 24px;
     padding: 20px 24px;
     background-color: ${(props) => (props.mode ? "#25273D" : "white")};
-
-    .isDone {
-      width: 20px;
-      height: 20px;
-    }
 
     p {
       width: 78%;
@@ -129,5 +136,19 @@ const TaskDiv = styled.div<{ mode: boolean; done: boolean }>`
         : props.mode
         ? "#C8CBE7"
         : "#494c6b"};
+  }
+
+  .isDone {
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(211, 211, 211, 0.7);
+    cursor: pointer;
+    background: ${(props) =>
+      props.done ? " linear-gradient(135deg, #55ddff 0%, #c058f3 100%)" : ""};
   }
 `;
