@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import bgLight from "./assets/bg-mobile-light.jpg";
 import bgDark from "./assets/bg-mobile-dark.jpg";
+import bgLDesktop from "./assets/bg-desktop-light.jpg";
+import bgDDesktop from "./assets/bg-desktop-dark.jpg";
 import GlobalStyles from "./GlobalStyles";
 import Todo from "./Components/Todo";
 import Header from "./Components/Header";
@@ -46,6 +48,10 @@ const Container = styled.main<{ mode: boolean }>`
   background-size: 100% 200px;
   padding-top: 48px;
   background-color: ${(props) => (props.mode ? "#25273D" : " #FAFAFA;")};
+
+  @media screen and (min-width: 1024px) {
+    background-image: url(${(props) => (props.mode ? bgDDesktop : bgLDesktop)});
+  }
 `;
 
 const TodoContainer = styled.div`
