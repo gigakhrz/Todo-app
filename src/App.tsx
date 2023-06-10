@@ -6,18 +6,27 @@ import Todo from "./Components/Todo";
 import Header from "./Components/Header";
 import { useSelector } from "react-redux";
 import { RootState } from "./features/store";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ActiveTodos from "./Components/ActiveTodos";
+import CreateNewTodo from "./Components/CreateNewTodo";
 
 function App() {
   const mode = useSelector((store: RootState) => store.lightMode.dark);
 
   return (
-    <>
+    <Router>
       <GlobalStyles />
       <Container mode={mode}>
         <Header />
-        <Todo />
+        <TodoContainer>
+          <CreateNewTodo />
+          <Routes>
+            <Route path="/" element={<Todo />} />
+            <Route path="/active" element={<ActiveTodos />} />
+          </Routes>
+        </TodoContainer>
       </Container>
-    </>
+    </Router>
   );
 }
 
@@ -35,4 +44,12 @@ const Container = styled.main<{ mode: boolean }>`
   background-size: 100% 200px;
   padding-top: 48px;
   background-color: ${(props) => (props.mode ? "#25273D" : "white")};
+`;
+
+const TodoContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
 `;

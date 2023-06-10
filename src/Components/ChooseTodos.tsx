@@ -1,15 +1,16 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../features/store";
+import { Link } from "react-router-dom";
 
 const ChooseTodos = (): JSX.Element => {
   const mode = useSelector((store: RootState) => store.lightMode.dark);
 
   return (
     <ChooseContainer mode={mode}>
-      <p>All</p>
-      <p>Active</p>
-      <p>Completed</p>
+      <Link to="/">All</Link>
+      <Link to="/active">Active</Link>
+      <Link to="/completed">Completed</Link>
     </ChooseContainer>
   );
 };
@@ -30,7 +31,8 @@ const ChooseContainer = styled.nav<{ mode: boolean }>`
   justify-content: center;
   gap: 19px;
 
-  p {
+  a {
+    text-decoration: none;
     font-size: 14px;
     font-weight: 700;
     line-height: 14px;
