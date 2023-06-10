@@ -77,6 +77,8 @@ const TaskDiv = styled.div<{ mode: boolean; done: boolean }>`
   display: flex;
   align-items: center;
   flex-direction: column;
+  background-color: ${(props) => (props.mode ? "#25273D" : "white")};
+  border-radius: 5px;
   @media (min-width: 1024px) {
     width: 540px;
   }
@@ -138,6 +140,7 @@ const Ulcontainer = styled.div<{
   flex-direction: column;
   background-color: white;
   border-radius: 5px;
+  background-color: ${(props) => (props.mode ? "#25273D" : "white")};
 
   box-shadow: ${(props) =>
     props.mode

@@ -127,6 +127,7 @@ const Ulcontainer = styled.div<{
   flex-direction: column;
   background-color: white;
   border-radius: 5px;
+  background-color: ${(props) => (props.mode ? "#25273D" : "white")};
 
   box-shadow: ${(props) =>
     props.mode

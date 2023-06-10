@@ -1,22 +1,37 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../features/store";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const ChooseTodos = (): JSX.Element => {
   const mode = useSelector((store: RootState) => store.lightMode.dark);
 
+  const [page, setPage] = useState<string>("/");
+  const location = useLocation();
+
+  useEffect(() => {
+    const path = location.pathname;
+    setPage(path);
+  }, [location]);
+
   return (
-    <ChooseContainer mode={mode}>
-      <Link to="/">All</Link>
-      <Link to="/active">Active</Link>
-      <Link to="/completed">Completed</Link>
+    <ChooseContainer mode={mode} page={page}>
+      <Link className="all" to="/">
+        All
+      </Link>
+      <Link className="active" to="/active">
+        Active
+      </Link>
+      <Link className="completed" to="/completed">
+        Completed
+      </Link>
     </ChooseContainer>
   );
 };
 export default ChooseTodos;
 
-const ChooseContainer = styled.nav<{ mode: boolean }>`
+const ChooseContainer = styled.nav<{ mode: boolean; page: string }>`
   width: 327px;
   height: 48px;
   background-color: ${(props) => (props.mode ? "#25273D" : "white")};
@@ -36,7 +51,7 @@ const ChooseContainer = styled.nav<{ mode: boolean }>`
     gap: 25px;
 
     a:hover {
-      color: #3a7cfd;
+      color: #494c6b;
     }
   }
 
@@ -52,5 +67,17 @@ const ChooseContainer = styled.nav<{ mode: boolean }>`
       font-size: 16px;
       line-height: 16px;
     }
+  }
+
+  .all {
+    color: ${(props) => (props.page === "/" ? "#3a7cfd" : "#9495a5")};
+  }
+
+  .active {
+    color: ${(props) => (props.page === "/active" ? "#3a7cfd" : "#9495a5")};
+  }
+
+  .completed {
+    color: ${(props) => (props.page === "/completed" ? "#3a7cfd" : "#9495a5")};
   }
 `;
