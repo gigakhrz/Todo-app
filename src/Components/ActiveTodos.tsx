@@ -12,6 +12,7 @@ const ActiveTodos = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const actives = tasks.filter((task) => task.done === false);
+  const itemsLeft = actives.length;
 
   return (
     <Cont>
@@ -43,6 +44,9 @@ const ActiveTodos = (): JSX.Element => {
             <hr />
           </TaskDiv>
         ))}
+        <Count mode={mode}>
+          <p className="left">{itemsLeft} items left</p>
+        </Count>
       </Ulcontainer>
       {tasks.length > 0 ? <ChooseTodos /> : null}
     </Cont>
@@ -84,6 +88,7 @@ const Ulcontainer = styled.ul<{
     gap: 24px;
     padding: 20px 24px;
     background-color: ${(props) => (props.mode ? "#25273D" : "white")};
+    border-radius: 5px;
 
     p {
       width: 78%;
@@ -150,5 +155,28 @@ const TaskDiv = styled.div<{ mode: boolean; done: boolean }>`
     cursor: pointer;
     background: ${(props) =>
       props.done ? " linear-gradient(135deg, #55ddff 0%, #c058f3 100%)" : ""};
+  }
+`;
+
+const Count = styled.div<{ mode: boolean }>`
+  width: 327px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: ${(props) => (props.mode ? "#25273D" : "white")};
+  box-shadow: ${(props) =>
+    props.mode
+      ? " 0px 35px 50px -15px rgba(0, 0, 0, 0.5)"
+      : " 0px 35px 50px -15px rgba(194, 195, 214, 0.5)"};
+  padding: 0 20px;
+  border-radius: 5px;
+
+  p {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+    letter-spacing: -0.17px;
+    color: ${(props) => (props.mode ? "#9495A5" : "#5B5E7E")};
   }
 `;
