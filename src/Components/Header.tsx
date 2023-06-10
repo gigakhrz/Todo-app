@@ -16,7 +16,12 @@ const Header = (): JSX.Element => {
   return (
     <HeaderContainer>
       <img className="logo" src={logo} alt="logo img" />
-      <img onClick={handleSetMode} src={mode ? sun : mun} alt="" />
+      <img
+        className="light"
+        onClick={handleSetMode}
+        src={mode ? sun : mun}
+        alt=""
+      />
     </HeaderContainer>
   );
 };
@@ -37,6 +42,12 @@ const HeaderContainer = styled.header`
     @media screen and (min-width: 1024px) {
       width: 167px;
       height: 40px;
+    }
+  }
+
+  .light {
+    @media screen and (min-width: 1024px) {
+      cursor: pointer;
     }
   }
 `;
