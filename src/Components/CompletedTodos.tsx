@@ -85,6 +85,7 @@ const Ulcontainer = styled.div<{
     gap: 24px;
     padding: 20px 24px;
     background-color: ${(props) => (props.mode ? "#25273D" : "white")};
+    border-radius: 5px;
 
     p {
       width: 78%;
