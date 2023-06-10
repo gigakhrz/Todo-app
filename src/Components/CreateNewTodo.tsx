@@ -48,9 +48,19 @@ const Create = styled.form<{ mode: boolean }>`
     props.mode
       ? " 0px 35px 50px -15px rgba(0, 0, 0, 0.5)"
       : " 0px 35px 50px -15px rgba(194, 195, 214, 0.5)"};
+
+  @media screen and (min-width: 1024px) {
+    width: 540px;
+    padding: 20px 0 20px 24px;
+    gap: 24px;
+  }
   .check {
     width: 20px;
     height: 20px;
+    @media screen and (min-width: 1024px) {
+      width: 24px;
+      height: 24px;
+    }
 
     border: none;
     background: white;
@@ -71,6 +81,12 @@ const Create = styled.form<{ mode: boolean }>`
     letter-spacing: -0.17px;
     color: ${(props) => (props.mode ? "#C8CBE7" : "#494c6b")};
     background-color: ${(props) => (props.mode ? "#25273D" : "white")};
+    border-radius: 5px;
+    @media screen and (min-width: 1024px) {
+      font-size: 18px;
+      line-height: 18px;
+      letter-spacing: -0.25px;
+    }
   }
 
   .createTodo:focus-visible {
