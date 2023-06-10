@@ -161,6 +161,7 @@ const Ulcontainer = styled.div<{
       width: 540px;
       gap: 24px;
       padding: 20px 24px;
+      height: 64px;
     }
 
     &:hover {
@@ -216,6 +217,7 @@ const Count = styled.div<{ mode: boolean }>`
   @media (min-width: 1024px) {
     width: 540px;
     padding: 0 24px;
+    height: 64px;
   }
 
   p {

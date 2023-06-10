@@ -53,6 +53,7 @@ const Create = styled.form<{ mode: boolean }>`
 
   @media screen and (min-width: 1024px) {
     width: 540px;
+    height: 64px;
     padding: 20px 0 20px 24px;
     gap: 24px;
   }

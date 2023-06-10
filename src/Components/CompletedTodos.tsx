@@ -67,7 +67,7 @@ const TaskDiv = styled.div<{ mode: boolean; done: boolean }>`
   align-items: center;
   flex-direction: column;
   @media (min-width: 1024px) {
-    width: 540px;
+    min-width: 540px;
   }
 
   hr {
@@ -129,6 +129,10 @@ const Ulcontainer = styled.div<{
   border-radius: 5px;
   background-color: ${(props) => (props.mode ? "#25273D" : "white")};
 
+  @media screen and (min-width: 1024px) {
+    min-width: 540px;
+  }
+
   box-shadow: ${(props) =>
     props.mode
       ? " 0px 35px 50px -15px rgba(0, 0, 0, 0.5)"
@@ -148,6 +152,7 @@ const Ulcontainer = styled.div<{
       width: 540px;
       gap: 24px;
       padding: 20px 24px;
+      height: 64px;
     }
 
     &:hover {

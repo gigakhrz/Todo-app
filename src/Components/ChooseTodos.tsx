@@ -49,6 +49,7 @@ const ChooseContainer = styled.nav<{ mode: boolean; page: string }>`
   @media (min-width: 1024px) {
     width: 540px;
     gap: 25px;
+    height: 64px;
 
     a:hover {
       color: #494c6b;

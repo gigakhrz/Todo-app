@@ -51,6 +51,8 @@ const Container = styled.main<{ mode: boolean }>`
 
   @media screen and (min-width: 1024px) {
     background-image: url(${(props) => (props.mode ? bgDDesktop : bgLDesktop)});
+    background-size: 100% 300px;
+    padding-top: 70px;
   }
 `;
 
