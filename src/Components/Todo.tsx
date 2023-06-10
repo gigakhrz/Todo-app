@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { completed, deleteTodo } from "../features/todoSlice";
+import { completed, deleteTodo, deleteCompleted } from "../features/todoSlice";
 import { RootState } from "../features/store";
 import check from "../assets/icon-check.svg";
 import ChooseTodos from "./ChooseTodos";
@@ -13,6 +13,14 @@ const Todo = (): JSX.Element => {
   //for lightmode
   const mode = useSelector((store: RootState) => store.lightMode.dark);
 
+  //to clear completed todos
+  const clearCompleted = (): void => {
+    dispatch(deleteCompleted());
+  };
+
+  // how many active items left
+  const actives = tasks.filter((task) => task.done === false);
+  const itemsLeft = actives.length;
   return (
     <Cont>
       <Ulcontainer task={tasks} mode={mode}>
@@ -43,6 +51,10 @@ const Todo = (): JSX.Element => {
             <hr />
           </TaskDiv>
         ))}
+        <Count mode={mode}>
+          <p className="left">{itemsLeft} items left</p>
+          <button onClick={clearCompleted}>Clear copleted</button>
+        </Count>
       </Ulcontainer>
       {tasks.length > 0 ? <ChooseTodos /> : null}
     </Cont>
@@ -84,6 +96,7 @@ const Ulcontainer = styled.div<{
     gap: 24px;
     padding: 20px 24px;
     background-color: ${(props) => (props.mode ? "#25273D" : "white")};
+    border-radius: 5px;
 
     p {
       width: 78%;
@@ -150,5 +163,42 @@ const TaskDiv = styled.div<{ mode: boolean; done: boolean }>`
         : props.mode
         ? "#C8CBE7"
         : "#494c6b"};
+  }
+`;
+
+const Count = styled.div<{ mode: boolean }>`
+  width: 327px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: ${(props) => (props.mode ? "#25273D" : "white")};
+  box-shadow: ${(props) =>
+    props.mode
+      ? " 0px 35px 50px -15px rgba(0, 0, 0, 0.5)"
+      : " 0px 35px 50px -15px rgba(194, 195, 214, 0.5)"};
+  padding: 0 20px;
+  border-radius: 5px;
+
+  p {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+    letter-spacing: -0.17px;
+    color: ${(props) => (props.mode ? "#9495A5" : "#5B5E7E")};
+  }
+
+  button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #9495a5;
+    color: ${(props) => (props.mode ? "#9495A5" : "#5B5E7E")};
+
+    font-family: Josefin Sans;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+    letter-spacing: -0.17px;
   }
 `;
