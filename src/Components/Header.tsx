@@ -24,10 +24,14 @@ const Header = (): JSX.Element => {
 export default Header;
 
 const HeaderContainer = styled.header`
-  width: 540px;
+  width: 327px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (min-width: 1024px) {
+    width: 540px;
+  }
 
   .logo {
     @media screen and (min-width: 1024px) {
