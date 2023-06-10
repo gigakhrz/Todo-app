@@ -9,6 +9,7 @@ import { RootState } from "./features/store";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ActiveTodos from "./Components/ActiveTodos";
 import CreateNewTodo from "./Components/CreateNewTodo";
+import CompletedTodos from "./Components/CompletedTodos";
 
 function App() {
   const mode = useSelector((store: RootState) => store.lightMode.dark);
@@ -23,6 +24,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Todo />} />
             <Route path="/active" element={<ActiveTodos />} />
+            <Route path="/completed" element={<CompletedTodos />} />
           </Routes>
         </TodoContainer>
       </Container>
