@@ -15,7 +15,7 @@ const Header = (): JSX.Element => {
 
   return (
     <HeaderContainer>
-      <img src={logo} alt="logo img" />
+      <img className="logo" src={logo} alt="logo img" />
       <img onClick={handleSetMode} src={mode ? sun : mun} alt="" />
     </HeaderContainer>
   );
@@ -24,8 +24,15 @@ const Header = (): JSX.Element => {
 export default Header;
 
 const HeaderContainer = styled.header`
-  width: 327px;
+  width: 540px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .logo {
+    @media screen and (min-width: 1024px) {
+      width: 167px;
+      height: 40px;
+    }
+  }
 `;
